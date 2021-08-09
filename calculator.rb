@@ -6,4 +6,3 @@ class Calculator
     result = {height: height, length: length, width: width, weight: weight, distance: distance, price: price, size: size}
   end 
 end
-

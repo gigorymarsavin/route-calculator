@@ -4,5 +4,3 @@ class SizeError < StandardError
     super(message)
   end
 end
-
-

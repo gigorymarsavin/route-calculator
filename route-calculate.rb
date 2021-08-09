@@ -12,5 +12,3 @@ class RouteCalculate
     Calculator.calculate(height, width, length, weight, distance)
   end 
 end
-
-

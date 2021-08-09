@@ -1,10 +1,9 @@
 class Api
-  attr_reader :distance 
+  attr_reader :distance
 
   def distanceorg(point_to, point_from)
     distance_url = URI.open("https://www.distance24.org/route.json?stops=#{point_to}|#{point_from}").read
     @distance = JSON.parse(distance_url)["distances"][0]
-    
   end
 
   def mapbox(point_to, point_from)        
@@ -29,4 +28,3 @@ class Api
     @distance = distance_json["rows"][0]["elements"][0]["distance"]["value"]
   end
 end
-

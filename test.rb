@@ -44,19 +44,4 @@ class TestCalculator < Minitest::Test
     equal_size = Calculator.calculate(476, 21, 100, 50, 1000.0)
     assert equal_size[:price] == 1000.0 
   end
-
-end 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+end
