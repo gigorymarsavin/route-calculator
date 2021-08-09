@@ -22,23 +22,29 @@ end
 class TestCalculator < Minitest::Test 
   def test_small_size_low_weigth 
     small_size_low_weigth = Calculator.calculate( 10,20,30,5, 1000.0)
-    assert small_size_low_weigth == 1000.0
+    assert small_size_low_weigth[:price] == 1000.0
   end
 
   def test_big_size_low_weigth
     big_size_low_weigth = Calculator.calculate(100,200,300,5, 1000.0)
-    assert big_size_low_weigth == 2000.0
+    assert big_size_low_weigth[:price] == 2000.0
   end
 
   def test_big_size_big_weigth
     big_size_big_weigth = Calculator.calculate(100,200,300,50, 1000.0)
-    assert big_size_big_weigth == 3000.0
+    assert big_size_big_weigth[:price] == 3000.0
   end
 
   def test_small_size_big_weigth 
-    small_size_low_weigth = Calculator.calculate(10,20,30,50, 1000.0)
-    assert small_size_big_weigth == 1000.0
+    small_size_big_weigth = Calculator.calculate(10,20,30,50, 1000.0)
+    assert small_size_big_weigth[:price] == 1000.0
   end
+
+  def test_equal_size
+    equal_size = Calculator.calculate(476, 21, 100, 50, 1000.0)
+    assert equal_size[:price] == 1000.0 
+  end
+
 end 
 
 
