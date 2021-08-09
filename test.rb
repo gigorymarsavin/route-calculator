@@ -44,4 +44,14 @@ class TestCalculator < Minitest::Test
     equal_size = Calculator.calculate(476, 21, 100, 50, 1000.0)
     assert equal_size[:price] == 1000.0 
   end
+
+  def test_low_size_equal_weigth
+    low_size_equal_weigth = Calculator.calculate(6, 20, 10, 10, 1000.0)
+    assert low_size_equal_weigth[:price] == 1000.0
+  end
+
+  def test_big_size_equal_weigth
+    big_size_equal_weigth = Calculator.calculate(600, 200, 10, 10, 1000.0)
+    assert big_size_equal_weigth[:price] == 2000.0
+  end
 end
