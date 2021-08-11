@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative 'main'
-require_relative 'calculator'
+require_relative 'lib/package_hash_calculator/main'
+require_relative 'lib/package_hash_calculator/calculator'
 
 
 describe Calculator do

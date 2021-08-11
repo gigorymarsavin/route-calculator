@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @package.name %>
+</p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @package.surname %>
+</p>
+
+<p>
+  <strong>Midname:</strong>
+  <%= @package.midname %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @package.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @package.email %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @package.weight %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @package.length %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @package.width %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @package.height %>
+</p>
+
+<p>
+  <strong>Addr from:</strong>
+  <%= @package.addr_from %>
+</p>
+
+<p>
+  <strong>Addr to:</strong>
+  <%= @package.addr_to %>
+</p>
+
+<%= link_to 'Edit', edit_package_path(@package) %> |
+<%= link_to 'Back', packages_path %>

@@ -1,0 +1,72 @@
+<%= form_with(model: package, local: true) do |form| %>
+  <% if package.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(package.errors.count, "error") %> prohibited this package from being saved:</h2>
+
+      <ul>
+      <% package.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surname %>
+    <%= form.text_field :surname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :midname %>
+    <%= form.text_field :midname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :weight %>
+    <%= form.text_field :weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :length %>
+    <%= form.text_field :length %>
+  </div>
+
+  <div class="field">
+    <%= form.label :width %>
+    <%= form.text_field :width %>
+  </div>
+
+  <div class="field">
+    <%= form.label :height %>
+    <%= form.text_field :height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :addr_from %>
+    <%= form.text_field :addr_from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :addr_to %>
+    <%= form.text_field :addr_to %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
