@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_08_11_064130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "price"
-    t.float "distantion"
+    t.float "distance"
     t.float "size"
   end
 

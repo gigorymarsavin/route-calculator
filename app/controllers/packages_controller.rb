@@ -1,5 +1,6 @@
 class PackagesController < ApplicationController
   before_action :set_package, only: %i[ show edit update destroy ]
+  include RouteCalculator
 
   # GET /packages or /packages.json
   def index
@@ -22,10 +23,10 @@ class PackagesController < ApplicationController
   # POST /packages or /packages.json
   def create
     @package = Package.new(package_params)
-    package_hash = ::RouteCalculator.call(@package.point_from, @package.point_to, 'Distanceorg', @package.height, @package.width, @package.length, @package.weight)
-    @package.price = package_hash["price"]
-    @package.distance = package_hash["distance"]
-    @package.size = package_hash["size"]
+    package_hash = RouteCalculator.call(@package.addr_from, @package.addr_to, 'Distanceorg', @package.height, @package.width, @package.length, @package.weight)
+    @package.price = package_hash[:price]
+    @package.distance = package_hash[:distance]
+    @package.size = package_hash[:size]
 
     respond_to do |format|
       if @package.save
