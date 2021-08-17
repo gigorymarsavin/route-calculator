@@ -5,8 +5,10 @@ require_relative 'proxy'
 require_relative 'distanceorg'
 
 module RouteCalculator
-  def self.call(point_from, point_to, service, height, width, length, weight)
-    distance = Proxy.new.call(point_from, point_to, service, height, width, length, weight)
-    Calculator.call(height, width, length, weight, distance)
+  attr_accessor :distance
+
+  def self.call(hash={})
+    distance = Proxy.new.call(hash[:addr_from], hash[:addr_to], 'Distanceorg', hash[:height], hash[:width], hash[:length], hash[:weight])
+    Calculator.call(hash[:height], hash[:width], hash[:length], hash[:weight], distance)
   end
 end
