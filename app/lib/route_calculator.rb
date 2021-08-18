@@ -5,7 +5,7 @@ require_relative 'distanceorg'
 
 module RouteCalculator
   def self.call(hash={})
-    distance = Proxy.call(hash[:addr_from], hash[:addr_to], 'Distanceorg')
-    Calculator.call(distance, hash)
+    distance = Proxy.new(hash[:addr_from], hash[:addr_to], 'Distanceorg').call
+    Calculator.new(distance, hash).call
   end
 end
