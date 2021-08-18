@@ -23,8 +23,7 @@ class PackagesController < ApplicationController
   # POST /packages or /packages.json
   def create
     result_hash = RouteCalculator.call(package_params)
-    result_hash = result_hash.merge(package_params)
-    @package = Package.new(result_hash)
+    @package = Package.new(result_hash.merge(package_params))
 
     respond_to do |format|
       if @package.save
