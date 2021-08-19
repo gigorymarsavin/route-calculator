@@ -6,7 +6,7 @@ class Proxy
   def initialize(params={})
     @addr_from = params[:addr_from]
     @addr_to = params[:addr_to]
-    @service = 'Distanceorg'
+    @service = Api.find_by(status: true)[:name]
   end
 
   def self.call(params={})

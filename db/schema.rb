@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_065723) do
+ActiveRecord::Schema.define(version: 2021_08_19_085802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,11 @@ ActiveRecord::Schema.define(version: 2021_08_17_065723) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "api_services", force: :cascade do |t|
-    t.string "service"
+  create_table "apis", force: :cascade do |t|
+    t.string "name"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "packages", force: :cascade do |t|
