@@ -1,15 +1,17 @@
 require_relative 'calculator'
 
 class Proxy
-  attr_reader :point_from, :point_to, :service
-
-  def initialize(point_from, point_to, service)
-    @point_from = point_from
-    @point_to = point_to
+  def initialize(params={})
+    @addr_from = params[:addr_from]
+    @addr_to = params[:addr_to]
     @service = 'Distanceorg'
   end
 
-  def call
-    distance = Object.const_get("#{@service}").call(@point_to, @point_from)
+  def self.call(params={})
+    new(params).get_distance(params)
+  end
+
+  def get_distance(params)
+    params[:distance] = Object.const_get("#{@service}").call(@addr_to, @addr_from)
   end
 end
