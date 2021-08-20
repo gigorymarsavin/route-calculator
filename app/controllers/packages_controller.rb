@@ -22,7 +22,8 @@ class PackagesController < ApplicationController
 
   # POST /packages or /packages.json
   def create
-    result_hash = RouteCalculator.call(package_params)
+    api_service = Api.find_by(status: true).name
+    result_hash = RouteCalculator.call(package_params.merge(service: api_service))
     @package = Package.new(result_hash.merge(package_params))
 
     respond_to do |format|
@@ -66,6 +67,6 @@ class PackagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def package_params
-      params.require(:package).permit(:name, :surname, :midname, :phone, :email, :weight, :length, :width, :height, :addr_from, :addr_to).merge(service: Api.find_by(status: true).name)
+      params.require(:package).permit(:name, :surname, :midname, :phone, :email, :weight, :length, :width, :height, :addr_from, :addr_to)
     end
 end
