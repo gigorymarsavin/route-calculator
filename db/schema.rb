@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_08_19_085802) do
     t.integer "height"
     t.string "addr_from"
     t.string "addr_to"
+    t.string "service"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "price"

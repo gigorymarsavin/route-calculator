@@ -12,6 +12,7 @@ class CreatePackages < ActiveRecord::Migration[5.2]
       t.integer :height
       t.string :addr_from
       t.string :addr_to
+      t.string :service
 
       t.timestamps
     end
