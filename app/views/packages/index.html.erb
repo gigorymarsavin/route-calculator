@@ -2,6 +2,7 @@
 
 <%= link_to(image_tag(current_user.avatar.thumb.url, alt: 'Avatar'), current_user.avatar.url, target: '_blank') if current_user.avatar? %>
 
+<p> Айди юзера <%= current_user.id %> </p>
 
 <h1>Packages</h1>
 
@@ -27,6 +28,7 @@
     <% @packages.each do |package| %>
       <tr>
         <td><%= package.name %></td>
+        <td><%= package.user_id %></td>
         <td><%= package.surname %></td>
         <td><%= package.midname %></td>
         <td><%= package.phone %></td>
