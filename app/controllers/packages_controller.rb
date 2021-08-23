@@ -6,7 +6,7 @@ class PackagesController < ApplicationController
 
   # GET /packages or /packages.json
   def index
-    @packages = Package.where(user_id: current_user.id)
+    @packages = Package.where(user_id: current_user.id).page(params[:page])
     @avatar = current_user.avatar.thumb
   end
 
