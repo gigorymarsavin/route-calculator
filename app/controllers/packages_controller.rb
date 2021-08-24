@@ -1,12 +1,12 @@
 class PackagesController < ApplicationController
   before_action :set_package, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-
+  helper_method :sort_column, :sort_direction
   include RouteCalculator
 
   # GET /packages or /packages.json
   def index
-    @packages = Package.where(user_id: current_user.id).page(params[:page])
+    @packages = Package.order(sort_column + ' ' + sort_direction).page(params[:page])
     @avatar = current_user.avatar.thumb
   end
 
@@ -72,4 +72,12 @@ class PackagesController < ApplicationController
     def package_params
       params.require(:package).permit(:name, :surname, :midname, :phone, :email, :weight, :length, :width, :height, :addr_from, :addr_to, :user_id)
     end
+
+  def sort_column
+    params[:sort] || "name"
+  end
+
+  def sort_direction
+    params[:direction] || "asc"
+  end
 end

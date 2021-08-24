@@ -8,6 +8,9 @@
 <table>
   <thead>
     <tr>
+      <th><%= sortable "created_at" %></th>
+      <th><%= sortable "price" %></th>
+      <th><%= sortable "distance" %></th>
       <th>Name</th>
       <th>Surname</th>
       <th>Midname</th>
@@ -26,8 +29,10 @@
   <tbody>
     <% @packages.each do |package| %>
       <tr>
+        <td><%= package.created_at %></td>
+        <td><%= package.price %></td>
+        <td><%= package.distance %></td>
         <td><%= package.name %></td>
-        <td><%= package.user_id %></td>
         <td><%= package.surname %></td>
         <td><%= package.midname %></td>
         <td><%= package.phone %></td>
