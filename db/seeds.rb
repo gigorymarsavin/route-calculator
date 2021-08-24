@@ -1,4 +1,5 @@
 User.create!(email: 'sasha@example.com', password: '123456', password_confirmation: '123456')
+Api.create!(name: 'Distanceorg', status: true)
 
 rng = 1..30
 rng.each do

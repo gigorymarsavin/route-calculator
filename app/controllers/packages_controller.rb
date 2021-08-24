@@ -9,7 +9,6 @@ class PackagesController < ApplicationController
 
   def index
     @packages = Package.order(sort_column + ' ' + sort_direction).page(params[:page])
-    @avatar = current_user.avatar.thumb
   end
 
   def show

@@ -11,6 +11,7 @@
       <th><%= sortable "created_at" %></th>
       <th><%= sortable "price" %></th>
       <th><%= sortable "distance" %></th>
+      <th>Status</th>
       <th>Name</th>
       <th>Surname</th>
       <th>Midname</th>
@@ -32,6 +33,7 @@
         <td><%= package.created_at %></td>
         <td><%= package.price %></td>
         <td><%= package.distance %></td>
+        <td><%= package.aasm_state %></td>
         <td><%= package.name %></td>
         <td><%= package.surname %></td>
         <td><%= package.midname %></td>
