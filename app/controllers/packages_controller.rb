@@ -3,27 +3,25 @@ class PackagesController < ApplicationController
   before_action :authenticate_user!
   helper_method :sort_column, :sort_direction
   include RouteCalculator
+  extend Memoist
 
-  # GET /packages or /packages.json
+  memoize :current_user
+
   def index
     @packages = Package.order(sort_column + ' ' + sort_direction).page(params[:page])
     @avatar = current_user.avatar.thumb
   end
 
-  # GET /packages/1 or /packages/1.json
   def show
   end
 
-  # GET /packages/new
   def new
     @package = current_user.packages.build
   end
 
-  # GET /packages/1/edit
   def edit
   end
 
-  # POST /packages or /packages.json
   def create
     api_service = Api.find_by(status: true).name
     result_hash = RouteCalculator.call(package_params.merge(service: api_service))
