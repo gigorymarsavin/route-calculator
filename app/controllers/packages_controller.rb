@@ -1,5 +1,7 @@
 class PackagesController < ApplicationController
   before_action :set_package, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+
   include RouteCalculator
 
   # GET /packages or /packages.json
