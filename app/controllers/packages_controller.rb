@@ -7,7 +7,7 @@ class PackagesController < ApplicationController
   # GET /packages or /packages.json
   def index
     @packages = Package.where(user_id: current_user.id)
-    @avatar = current_user.avatar.thumb
+    @packages = Packages::BaseQuery.call(@packages, params)
   end
 
   # GET /packages/1 or /packages/1.json
