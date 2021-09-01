@@ -1,7 +1,7 @@
 module Packages
   class BaseQuery < Query
     def base_relation 
-      @relation = current_user.packages
+      @relation ||= current_user.packages
     end
   
     def execute 

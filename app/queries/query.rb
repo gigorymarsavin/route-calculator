@@ -16,10 +16,10 @@ class Query
   end
 
   def base_relation 
-
+    raise NotImplementedError, "#{self.class} has not method: #{__method__}"
   end
 
   def execute 
-    
+    raise NotImplementedError, "#{self.class} has not method: #{__method__}"
   end
 end

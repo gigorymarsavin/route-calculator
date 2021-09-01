@@ -4,11 +4,11 @@ module Packages
 
     def initialize(params)
       super
-      @sort = params[:sort]
+      @sort = params[:sort] || 'created_at'
     end
 
     def base_relation 
-      @relation = Packages::BaseQuery.call(current_user: current_user) 
+      @relation ||= Packages::BaseQuery.call(current_user: current_user) 
     end
     
     def execute 
