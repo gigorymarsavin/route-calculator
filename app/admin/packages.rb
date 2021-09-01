@@ -1,18 +1,11 @@
 ActiveAdmin.register Package do
+  permit_params :aasm_state, :name, :surname, :midname, :phone, :height, :length, :width, :weight, :price, :addr_to, :addr_from
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :name, :surname, :midname, :phone, :email, :weight, :length, :width, :height, :addr_from, :addr_to
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :surname, :midname, :phone, :email, :weight, :length, :width, :height, :addr_from, :addr_to]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
-end
+  form do |f|
+    f.inputs :name, :surname, :midname, :phone, :height, :length, :width, :weight, :price, :addr_to, :addr_from
+    f.inputs do
+      f.input :aasm_state, :as => :select, :collection => ['processed', 'sent', 'finished'], label: 'status'
+    end
+    f.actions
+  end
+end 

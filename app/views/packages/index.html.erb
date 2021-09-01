@@ -1,10 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to(image_tag(current_user.avatar.thumb.url, alt: 'Avatar'), current_user.avatar.url, target: '_blank') if current_user.avatar? %>
+
+<p> посылки юзера <%= current_user.packages %> </p>
+
 <h1>Packages</h1>
 
 <table>
   <thead>
     <tr>
+      <th><%= link_to 'Distance', :sort => 'distance' %></th>
+      <th><%= link_to 'Price', :sort => 'price' %></th>
+      <th><%= link_to 'Date', :sort => 'created_at' %></th>
       <th>Name</th>
       <th>Surname</th>
       <th>Midname</th>
@@ -16,6 +23,7 @@
       <th>Height</th>
       <th>Addr from</th>
       <th>Addr to</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,6 +31,9 @@
   <tbody>
     <% @packages.each do |package| %>
       <tr>
+        <th><%= package.distance %></th>
+        <th><%= package.price %></th>
+        <th><%= package.created_at %></th>
         <td><%= package.name %></td>
         <td><%= package.surname %></td>
         <td><%= package.midname %></td>
@@ -34,6 +45,7 @@
         <td><%= package.height %></td>
         <td><%= package.addr_from %></td>
         <td><%= package.addr_to %></td>
+        <td><%= package.aasm_state %></td>
         <td><%= link_to 'Show', package %></td>
         <td><%= link_to 'Edit', edit_package_path(package) %></td>
         <td><%= link_to 'Destroy', package, method: :delete, data: { confirm: 'Are you sure?' } %></td>
