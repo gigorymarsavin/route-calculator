@@ -6,7 +6,7 @@ class PackagesController < ApplicationController
 
   # GET /packages or /packages.json
   def index
-    @packages = Package.all
+    @packages = Packages::GridQuery.call(params.merge(current_user: current_user))
   end
 
   # GET /packages/1 or /packages/1.json
@@ -15,7 +15,7 @@ class PackagesController < ApplicationController
 
   # GET /packages/new
   def new
-    @package = Package.new
+    @package = current_user.packages.build
   end
 
   # GET /packages/1/edit
@@ -26,7 +26,7 @@ class PackagesController < ApplicationController
   def create
     api_service = Api.find_by(status: true).name
     result_hash = RouteCalculator.call(package_params.merge(service: api_service))
-    @package = Package.new(result_hash.merge(package_params))
+    @package = current_user.packages.new(result_hash.merge(package_params))
 
     respond_to do |format|
       if @package.save
@@ -69,6 +69,6 @@ class PackagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def package_params
-      params.require(:package).permit(:name, :surname, :midname, :phone, :email, :weight, :length, :width, :height, :addr_from, :addr_to)
+      params.require(:package).permit(:name, :surname, :midname, :phone, :email, :weight, :length, :width, :height, :addr_from, :addr_to, :user_id)
     end
 end
