@@ -1,9 +1,9 @@
-class BaseQuery
+class Query
   attr_accessor :current_user, :relation
 
   def initialize(params)
-    @current_user = params[:user]
-    @relation = nil 
+    @current_user = params[:current_user]
+    @relation = nil
   end
 
   def self.call(params)
@@ -20,6 +20,6 @@ class BaseQuery
   end
 
   def execute 
-
+    
   end
 end

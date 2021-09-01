@@ -1,11 +1,18 @@
 module Packages
-  class GridQuery < BaseQuery
+  class GridQuery < Query
+    attr_accessor :sort 
+
+    def initialize(params)
+      super
+      @sort = params[:sort]
+    end
+
     def base_relation 
-      relation = Packages::BaseQuery.call(user: current_user) 
+      @relation = Packages::BaseQuery.call(current_user: current_user) 
     end
     
     def execute 
-      relation
+      relation.order("#{sort} DESC")
     end
   end
 end

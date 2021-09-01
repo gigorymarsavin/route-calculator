@@ -2,13 +2,16 @@
 
 <%= link_to(image_tag(current_user.avatar.thumb.url, alt: 'Avatar'), current_user.avatar.url, target: '_blank') if current_user.avatar? %>
 
-<p> Айди юзера <%= current_user.id %> </p>
+<p> посылки юзера <%= current_user.packages %> </p>
 
 <h1>Packages</h1>
 
 <table>
   <thead>
     <tr>
+      <th><%= link_to 'Distance', :sort => 'distance' %></th>
+      <th><%= link_to 'Price', :sort => 'price' %></th>
+      <th><%= link_to 'Date', :sort => 'created_at' %></th>
       <th>Name</th>
       <th>Surname</th>
       <th>Midname</th>
@@ -27,6 +30,9 @@
   <tbody>
     <% @packages.each do |package| %>
       <tr>
+        <th><%= package.distance %></th>
+        <th><%= package.price %></th>
+        <th><%= package.created_at %></th>
         <td><%= package.name %></td>
         <td><%= package.surname %></td>
         <td><%= package.midname %></td>
