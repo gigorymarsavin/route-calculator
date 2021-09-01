@@ -1,18 +1,13 @@
 module Packages
-  class BaseQuery
-    attr_accessor :current_user
-
-    def initialize(params)
-      @current_user = params[:user]
+  class BaseQuery < BaseQuery
+    def base_relation 
+      relation = current_user.packages
     end
-
-    def self.call(params)
-      new(params).all_packages
+  
+    def execute 
+      relation
     end
-
-    def all_packages
-      Package.all
-    end
+    
   end
 end
 
