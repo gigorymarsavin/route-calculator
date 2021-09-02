@@ -6,7 +6,7 @@ class PackagesController < ApplicationController
 
   # GET /packages or /packages.json
   def index
-    @packages = Packages::GridQuery.call(params.merge(current_user: current_user)).page(params[:page])
+    @packages = Packages::GridQuery.call(params.merge(current_user: current_user))
   end
 
   # GET /packages/1 or /packages/1.json
