@@ -4,9 +4,11 @@
 
 <h1>Packages</h1>
 
-<%= form_tag("/packages", method: "get") do %>
+
+
+<%= form_tag('/packages', :method => "get") do %>
   <%= label_tag("elements per page") %>
-  <%= text_field_tag(:per_page) %>
+  <%= select_tag :per_page, options_for_select([ 5, 10, 20], 5) %>
   <%= submit_tag("ok") %>
 <% end %>
 
