@@ -1,6 +1,6 @@
 module Packages
   class GridQuery < Query
-    attr_accessor :sort
+    attr_accessor :sort, :params, :per_page
 
     def initialize(params)
       super
