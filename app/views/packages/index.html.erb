@@ -12,11 +12,11 @@
   <%= submit_tag("ok") %>
 <% end %>
 
-<%= paginate @packages %>
 
 <table>
   <thead>
     <tr>
+      
       <th><%= link_to 'Distance', :sort => 'distance', :per_page => @packages_many %></th>
       <th><%= link_to 'Price', :sort => 'price', :per_page => @packages_many %></th>
       <th><%= link_to 'Date', :sort => 'created_at', :per_page => @packages_many %></th>
