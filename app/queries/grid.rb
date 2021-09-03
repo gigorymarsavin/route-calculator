@@ -3,7 +3,7 @@ class Grid
 
   def initialize(params)
     @page = params[:page]
-    @per_page = params[:per_page]
+    @per_page = params[:per_page] || 5
     @sort = params[:sort] || 'created_at'
     @current_user = params[:current_user]
   end

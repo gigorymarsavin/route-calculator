@@ -1,14 +1,5 @@
 module Packages
-  class GridQuery < Grid     
-    attr_accessor :sort, :per_page, :page, :current_user
-
-    def initialize(params)
-      @page = params[:page]
-      @per_page = params[:per_page]
-      @sort = params[:sort] || 'created_at'
-      @current_user = params[:current_user]
-    end
-
+  class GridQuery < Grid    
     def base_relation 
       @relation ||= Packages::BaseQuery.call(current_user: current_user)
     end
