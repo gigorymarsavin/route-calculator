@@ -6,8 +6,7 @@ module Packages
   
     def execute 
       relation
-    end
-    
+    end    
   end
 end
 

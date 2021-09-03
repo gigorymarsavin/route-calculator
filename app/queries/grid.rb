@@ -1,11 +1,11 @@
-class Query
-  attr_accessor :current_user, :relation, :per_page, :params 
+class Grid
+  attr_accessor :sort, :per_page, :page, :current_user
 
   def initialize(params)
-    @current_user = params[:current_user]
-    @relation = nil
+    @page = params[:page]
     @per_page = params[:per_page]
-    @params = params 
+    @sort = params[:sort] || 'created_at'
+    @current_user = params[:current_user]
   end
 
   def self.call(params)
@@ -14,14 +14,17 @@ class Query
 
   def call 
     base_relation
-    execute
+    execute_sort 
+    execute_paginate
   end
 
-  def base_relation 
+  def execute_sort 
     raise NotImplementedError, "#{self.class} has not method: #{__method__}"
   end
 
-  def execute 
+  def execute_paginate
     raise NotImplementedError, "#{self.class} has not method: #{__method__}"
   end
+  
+
 end
