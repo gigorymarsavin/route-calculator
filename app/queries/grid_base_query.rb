@@ -4,8 +4,7 @@ class GridBaseQuery < BaseQuery
 
   def initialize(params)
     super
-    @per_page = params[:per_page]
-
+    @per_page = params[:per_page] || 5
     @sort = params[:sort] || 'created_at'
     @page = params[:page]
 
