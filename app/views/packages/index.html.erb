@@ -4,22 +4,21 @@
 
 <h1>Packages</h1>
 
-
-
 <%= form_tag('/packages', :method => "get") do %>
   <%= label_tag("elements per page") %>
   <%= select_tag :per_page, options_for_select([ 5, 10, 20], @packages_many) %>
   <%= submit_tag("ok") %>
 <% end %>
 
+<%= paginate @packages %>
+
 
 <table>
   <thead>
-    <tr>
-      
-      <th><%= link_to 'Distance', :sort => 'distance', :per_page => @packages_many %></th>
-      <th><%= link_to 'Price', :sort => 'price', :per_page => @packages_many %></th>
-      <th><%= link_to 'Date', :sort => 'created_at', :per_page => @packages_many %></th>
+    <tr>      
+      <th><%= button_to 'Distance', {controller: :packages, action: :index}, method: :get, params: {sort: 'distance'} %></th>
+      <th><%= button_to 'Price', {controller: :packages, action: :index}, method: :get, params: {sort: 'price'} %></th>
+      <th><%= button_to 'Date', {controller: :packages, action: :index}, method: :get, params: {sort: 'created_at'} %></th>
       <th>Name</th>
       <th>Surname</th>
       <th>Midname</th>
