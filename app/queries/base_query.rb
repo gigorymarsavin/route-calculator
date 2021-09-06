@@ -1,4 +1,4 @@
-class Query
+class BaseQuery
   attr_accessor :current_user, :relation
 
   def initialize(params)
@@ -11,15 +11,24 @@ class Query
   end
 
   def call 
-    base_relation
-    execute 
+    execute_defaults
+    execute
+    relation
   end
 
-  def base_relation 
-    raise NotImplementedError, "#{self.class} has not method: #{__method__}"
+  def base_relation
+     raise "#{self.class} doesn't have #{__method__} method"
   end
 
   def execute 
-    raise NotImplementedError, "#{self.class} has not method: #{__method__}"
+    
+  end
+
+  def execute_defaults
+
+  end
+
+  def relation
+    @relation ||= base_relation
   end
 end
