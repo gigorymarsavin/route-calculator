@@ -7,7 +7,6 @@ class GridBaseQuery < BaseQuery
     @per_page = params[:per_page] || 5
     @sort = params[:sort] || 'created_at'
     @page = params[:page]
-
   end
 
   def execute_defaults 
