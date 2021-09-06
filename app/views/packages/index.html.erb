@@ -2,16 +2,22 @@
 
 <%= link_to(image_tag(current_user.avatar.thumb.url, alt: 'Avatar'), current_user.avatar.url, target: '_blank') if current_user.avatar? %>
 
-<p> посылки юзера <%= current_user.packages %> </p>
-
 <h1>Packages</h1>
+
+<%= form_tag('/packages', :method => "get") do %>
+  <%= label_tag("elements per page") %>
+  <%= select_tag :per_page, options_for_select([ 5, 10, 20], @packages_select_tag_value) %>
+  <%= submit_tag("ok") %>
+<% end %>
+
+<%= paginate @packages %>
 
 <table>
   <thead>
-    <tr>
-      <th><%= link_to 'Distance', :sort => 'distance' %></th>
-      <th><%= link_to 'Price', :sort => 'price' %></th>
-      <th><%= link_to 'Date', :sort => 'created_at' %></th>
+    <tr>      
+      <th><%= button_to 'Distance', {controller: :packages, action: :index}, method: :get, params: {sort: 'distance', per_page:  @packages_select_tag_value } %></th>
+      <th><%= button_to 'Price', {controller: :packages, action: :index}, method: :get, params: {sort: 'price', per_page:  @packages_select_tag_value} %></th>
+      <th><%= button_to 'Date', {controller: :packages, action: :index}, method: :get, params: {sort: 'created_at', per_page:  @packages_select_tag_value} %></th>
       <th>Name</th>
       <th>Surname</th>
       <th>Midname</th>
