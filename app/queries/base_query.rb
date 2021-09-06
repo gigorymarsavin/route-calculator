@@ -4,7 +4,6 @@ class BaseQuery
   def initialize(params)
     @current_user = params[:current_user]
     @relation = nil
-    
   end
 
   def self.call(params)
