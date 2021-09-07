@@ -3,15 +3,17 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
-gem 'activeadmin'
 gem 'aasm'
+gem 'activeadmin'
+gem 'activeadmin_addons'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'carrierwave'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'faker'
 gem 'jbuilder', '~> 2.5'
-gem 'mini_magick'
 gem 'kaminari'
+gem 'mini_magick'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.6'
