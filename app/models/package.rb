@@ -1,20 +1,37 @@
 class Package < ApplicationRecord
+  after_create :mail_after_create_job
 
   validates :name, :midname, :surname, :phone, :email, :width, :length, :height, :addr_from, :addr_to, presence: true
-  belongs_to :user
+  validates :phone, numericality: { only_integer: true, message: 'field should be only numbers' }
+
+  belongs_to :user, optional: true
+
+  include AASM
 
   aasm do
     state :processed, initial: true
     state :sent
-    state :finished
+    state :delivered
 
-    event :sent_package do
-      transitions from: [:processed], to: :sent
+    event :package_sent do
+      transitions to: :sent, success: proc {  sent_event_job }
     end
 
-    event :delivered do
-      transitions from: [:sent], to: :finished
+    event :package_delivered do
+      transitions to: :delivered, success: proc { delivered_event_job }
     end
-
   end
+
+  def mail_after_create_job
+    PackageMailer.with(params: self).package_created.deliver!
+  end
+
+  def delivered_event_job
+    PackageMailer.with(params: self).delivered_status.deliver!
+  end
+
+  def sent_event_job
+    PackageMailer.with(params: self).sent_status.deliver!
+  end
+
 end
