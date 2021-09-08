@@ -1,5 +1,5 @@
-class PackageBase
-  attr_accessor :email, :name, :surname, :midname, :phone, :weight, :size, :addr_to, :addr_from, :price
+class PackageMailerBase
+  attr_accessor :email, :name, :surname, :midname, :phone, :weight, :size, :addr_to, :addr_from, :price, :defaults 
 
   def initialize(params)
     @email = params[:params]['email']
@@ -12,5 +12,9 @@ class PackageBase
     @addr_to = params[:params]['addr_to']
     @addr_from = params[:params]['addr_from']
     @price = params[:params]['price']
+  end
+
+  def self.defaults(params)
+    PackageBase.new(params)
   end
 end
