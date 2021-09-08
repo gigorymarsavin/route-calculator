@@ -6,16 +6,25 @@ class Package < ApplicationRecord
 
   aasm do
     state :processed, initial: true
-    state :sent
+    state :sent 
     state :delivered
 
-    event :sent_package do
-      transitions from: [:processed], to: :sent
-    end
+    event :package_sent do
+      transitions from: :processed, to: :sent, success: Proc.new { after_change_status_job }
+    end 
 
-    event :delivered do
-      transitions from: [:sent], to: :delivered
+    event :package_delivered do
+      transitions to: :delivered, success: Proc.new { after_change_status_job }
     end
-
   end
+
+  after_create do
+    SendMailAfterCreateJob.perform_later(self)
+  end
+
+  def after_change_status_job
+    SendMailAfterChangeStatusJob.perform_later(self)
+  end
+
+
 end
