@@ -29,12 +29,14 @@ class PackagesController < ApplicationController
     result_hash = RouteCalculator.call(package_params.merge(service: api_service))
     @package = current_user.packages.new(result_hash.merge(package_params))
 
-    PackageMailer.with(params: @package).package_created.deliver!
+    
 
     respond_to do |format|
       if @package.save
         format.html { redirect_to @package, notice: "Package was successfully created." }
         format.json { render :show, status: :created, location: @package }
+        SendMailAfterCreateJob.perform_later(@package)
+        #PackageMailer.with(params: @package).package_created.deliver_now
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @package.errors, status: :unprocessable_entity }

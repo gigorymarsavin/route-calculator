@@ -15,6 +15,6 @@ class PackageMailerBase
   end
 
   def self.defaults(params)
-    PackageBase.new(params)
+    PackageMailerBase.new(params)
   end
 end

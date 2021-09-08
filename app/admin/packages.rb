@@ -12,12 +12,11 @@ ActiveAdmin.register Package do
   end
 
   controller do
-    # This code is evaluated within the controller class
 
     def update
       default_aasm = resource.aasm_state
       update!
-      resource.aasm_state != default_aasm ? PackageMailer.with(params: resource).send("#{resource.aasm_state}_status").deliver! : nil
+      resource.aasm_state != default_aasm ? SendMailAfterChangeStatusJob.perform_later(resource) : nil
     end
   end
 end
