@@ -17,7 +17,7 @@ ActiveAdmin.register Package do
     def update
       default_aasm = resource.aasm_state
       update!
-      resource.aasm_state != default_aasm ? PackageMailer.with(email: resource.email).send("#{resource.aasm_state}_status").deliver! : nil
+      resource.aasm_state != default_aasm ? PackageMailer.with(params: resource).send("#{resource.aasm_state}_status").deliver! : nil
     end
   end
 end

@@ -29,7 +29,7 @@ class PackagesController < ApplicationController
     result_hash = RouteCalculator.call(package_params.merge(service: api_service))
     @package = current_user.packages.new(result_hash.merge(package_params))
 
-    PackageMailer.package_created(params).deliver!
+    PackageMailer.with(params: @package).package_created.deliver!
 
     respond_to do |format|
       if @package.save
