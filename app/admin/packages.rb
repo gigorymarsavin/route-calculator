@@ -12,8 +12,7 @@ ActiveAdmin.register Package do
   end
 
   controller do
-    # This code is evaluated within the controller class
-
+    
     def update
       default_aasm = resource.aasm_state
       update!
