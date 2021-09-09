@@ -21,4 +21,18 @@ ActiveAdmin.register Package do
       end
     end
   end
+
+  index do
+    column :id 
+    column :name 
+    column :surname 
+    column :email 
+    column :phone 
+    column :size 
+    column :addr_from
+    column :addr_to
+    state_column :aasm_state
+     
+  end
+
 end

@@ -1,8 +1,12 @@
 class Package < ApplicationRecord
-  include AASM 
+  after_create :mail_after_create_job
+
   validates :name, :midname, :surname, :phone, :email, :width, :length, :height, :addr_from, :addr_to, presence: true
   validates :phone, numericality: { only_integer: true, message: 'field should be only numbers' }
+
   belongs_to :user, optional: true
+
+  include AASM
 
   aasm do
     state :processed, initial: true
@@ -18,7 +22,7 @@ class Package < ApplicationRecord
     end
   end
 
-  after_create do    
+  def mail_after_create_job
     PackageMailer.with(params: self).package_created.deliver!
   end
 
