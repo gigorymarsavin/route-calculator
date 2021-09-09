@@ -9,13 +9,25 @@ class Package < ApplicationRecord
     state :sent
     state :delivered
 
-    event :sent_package do
-      transitions from: [:processed], to: :sent
+    event :package_sent do
+      transitions to: :sent, success: proc {  sent_event_job }
     end
 
-    event :delivered do
-      transitions from: [:sent], to: :delivered
+    event :package_delivered do
+      transitions to: :delivered, success: proc { delivered_event_job }
     end
-
   end
+
+  after_create do    
+    PackageMailer.with(params: self).package_created.deliver!
+  end
+
+  def delivered_event_job
+    PackageMailer.with(params: self).delivered_status.deliver!
+  end
+
+  def sent_event_job
+    PackageMailer.with(params: self).sent_status.deliver!
+  end
+
 end
