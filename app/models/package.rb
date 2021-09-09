@@ -14,24 +14,20 @@ class Package < ApplicationRecord
     state :delivered
 
     event :package_sent do
-      transitions to: :sent, success: proc {  sent_event_job }
+      transitions to: :sent, success: proc {  mail_after_change_status_job }
     end
 
     event :package_delivered do
-      transitions to: :delivered, success: proc { delivered_event_job }
+      transitions to: :delivered, success: proc { mail_after_change_status_job }
     end
   end
 
   def mail_after_create_job
-    PackageMailer.with(params: self).package_created.deliver!
+    SendMailAfterCreateJob.perform_later(self)
   end
 
-  def delivered_event_job
-    PackageMailer.with(params: self).delivered_status.deliver!
-  end
-
-  def sent_event_job
-    PackageMailer.with(params: self).sent_status.deliver!
+  def mail_after_change_status_job
+    SendMailAfterChangeStatusJob.perform_later(self)
   end
 
 end

@@ -32,7 +32,7 @@ ActiveAdmin.register Package do
     column :addr_from
     column :addr_to
     state_column :aasm_state
-     
+    actions 
   end
 
 end

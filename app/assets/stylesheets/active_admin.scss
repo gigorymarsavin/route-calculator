@@ -12,9 +12,9 @@
 @import "active_admin/base";
 
 .status_tag {
-  &.processed { background: yellow; }
-  &.sent { background: yellowgreen; }
-  &.sent { background: darkgreen; }
+  &.processed { color: black; background-color: yellow }
+  &.sent { color: black; background-color: yellowgreen}
+  &.delivered { color: white; background-color: darkgreen }
 }
 
 
