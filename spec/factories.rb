@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do 
+  factory :user do
     email {Faker::Internet.unique.email}
     password {"123456"}
     password_confirmation {'123456'}
@@ -21,7 +21,7 @@ FactoryBot.define do
     addr_to {'London'}
   end
 
-  factory :api do 
+  factory :api do
     name {'Distanceorg'}
     status {true}
   end

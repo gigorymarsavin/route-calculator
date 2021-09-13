@@ -31,7 +31,7 @@ RSpec.describe PackageMailer, type: :mailer do
   it 'send email after new package was created' do
     expect {
       perform_enqueued_jobs do
-        Package.create(name:'sanya', midname: 'ivanovich', surname: 'test', phone: '8138213', email: 'yamamoto@gmail.ru', 
+        Package.create(name:'sanya', midname: 'ivanovich', surname: 'test', phone: '8138213', email: 'yamamoto@gmail.ru',
           width: 100, length: 100, height: 100, size: 100, price: 200, weight: 100, addr_to:  "Moscow", addr_from: "Berlin" )
       end
     }.to change { ActionMailer::Base.deliveries.size }.by(1)
