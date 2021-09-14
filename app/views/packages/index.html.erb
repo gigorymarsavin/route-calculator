@@ -1,13 +1,31 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to "exit", destroy_user_session_path, method: :delete %>
+
 <%= link_to(image_tag(current_user.avatar.thumb.url, alt: 'Avatar'), current_user.avatar.url, target: '_blank') if current_user.avatar? %>
 
 <h1>Packages</h1>
+
+<% if current_user.is_admin %>
+  <%= form_tag('/packages', :method => "get") do %>
+    <%= label_tag("filter by operator") %>    
+    <%= select_tag(:oper_id, options_from_collection_for_select(@operators, :id, :email)) %>
+    <%= button_to 'ok', {controller: :packages, action: :index}, method: :get, params: {per_page:  @packages_select_tag_value } %>
+  <% end  %>
+  <%= button_to 'show all', {controller: :packages, action: :index}, method: :get, params: { per_page:  @packages_select_tag_value} %>
+<% end  %>
+
+<br>
+<br>
 
 <%= form_tag('/packages', :method => "get") do %>
   <%= label_tag("elements per page") %>
   <%= select_tag :per_page, options_for_select([ 5, 10, 20], @packages_select_tag_value) %>
   <%= submit_tag("ok") %>
+<% end %>
+
+<% if @current_operator_packages_email %>
+  <h3> Now you look only <%= @current_operator_packages_email %> packages </h3>
 <% end %>
 
 <%= paginate @packages %>
