@@ -7,7 +7,6 @@ RSpec.describe Package, type: :model do
   let!(:package_x) { create(:package) }
   let!(:package_y) { create(:package, user_id: 2) }
 
-  let!(:package) {create(:package)}
   let!(:api_service) {create(:api, name: 'noapi')}
   
   it 'operator gets only his own packages' do
@@ -20,13 +19,13 @@ RSpec.describe Package, type: :model do
     expect(package_x.aasm_state).to eq('sent')
   end
 
-  it 'package_sent aasm_state should work ' do 
+  it 'package_delivered aasm_state should work ' do 
     package_x.package_delivered! 
     expect(package_x.aasm_state).to eq('delivered')
   end
   
   it 'proxy should not works when api name incorrect' do    
-    package_params = package.attributes
+    package_params = package_x.attributes
     expect { RouteCalculator.call(package_params.merge(service: api_service.name)) }.to raise_error(NameError)
   end
 end
