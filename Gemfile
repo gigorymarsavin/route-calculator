@@ -36,6 +36,8 @@ group :development do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'solargraph'
+  gem 'pry'
+  gem 'meta_request'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
