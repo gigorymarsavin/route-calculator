@@ -5,6 +5,7 @@ class Package < ApplicationRecord
   validates :phone, numericality: { only_integer: true, message: 'field should be only numbers' }
 
   belongs_to :user, optional: true
+  belongs_to :organization, optional: true
 
   include AASM
 
