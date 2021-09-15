@@ -4,6 +4,8 @@ FactoryBot.define do
     password {"123456"}
     password_confirmation {'123456'}
     id {1}
+    is_admin {false}
+    organisation_id {1}
   end
 
   factory :package do
@@ -17,8 +19,11 @@ FactoryBot.define do
     length {21}
     height {11}
     weight {33}
+    price {rand(100)}
+    distance {rand(1000)}
     addr_from {'Moscow'}
     addr_to {'London'}
+    organisation_id {1}
   end
 
   factory :api do

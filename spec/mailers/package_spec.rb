@@ -40,9 +40,9 @@ RSpec.describe PackageMailer, type: :mailer do
   it 'email sent after package correctly change status' do 
     expect {
       perform_enqueued_jobs do
-        package.package_delivered!
-        puts ActionMailer::Base.deliveries.size
+        package.package_delivered!        
       end 
     }.to change { ActionMailer::Base.deliveries.size }.by(1)
   end
+  
 end
