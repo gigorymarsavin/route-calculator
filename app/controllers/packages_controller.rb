@@ -6,10 +6,10 @@ class PackagesController < ApplicationController
 
   # GET /packages or /packages.json
   def index
-    @packages = Packages::GridQuery.call(params.merge(current_user: current_user))
-    @packages_select_tag_value = @packages.length
     @operators = Operators::GridQuery.call((params.merge(current_user: current_user)).except(:sort))
-    @current_operator_packages_email = @operators.find_by(id: params[:oper_id]).email if params[:oper_id].present?
+    @packages = Packages::GridQuery.call(params.merge(current_user: current_user))
+    @packages_select_tag_value = @packages.length    
+    @current_operator_packages_email = @operators.find_by(id: params[:oper_id]).email if params[:oper_id].present? && @operators.present?  
   end
 
   # GET /packages/1 or /packages/1.json
