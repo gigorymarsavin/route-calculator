@@ -1,19 +1,48 @@
-# gets the docker image of ruby 2.5 and lets us build on top of that
-FROM ruby:2.5.1-slim
+FROM ruby:2.5.1-alpine
 
-# install rails dependencies
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs libsqlite3-dev
+ENV BUNDLER_VERSION=2.0.2
 
-# create a folder /myapp in the docker container and go into that folder
-RUN mkdir /calculate
-WORKDIR /calculate
+RUN apk add --update --no-cache \
+      binutils-gold \
+      build-base \
+      curl \
+      file \
+      g++ \
+      gcc \
+      git \
+      less \
+      libstdc++ \
+      libffi-dev \
+      libc-dev \
+      linux-headers \
+      libxml2-dev \
+      libxslt-dev \
+      libgcrypt-dev \
+      make \
+      netcat-openbsd \
+      nodejs \
+      openssl \
+      pkgconfig \
+      postgresql-dev \
+      python \
+      tzdata \
+      yarn
 
-# Copy the Gemfile and Gemfile.lock from app root directory into the /myapp/ folder in the docker container
-COPY Gemfile /calculate/Gemfile
+RUN gem install bundler -v 2.0.2
 
+WORKDIR /app
 
-# Run bundle install to install gems inside the gemfile
-RUN bundle install
+COPY Gemfile Gemfile.lock ./
 
-# Copy the whole app
-COPY . /calculate
+RUN bundle config build.nokogiri --use-system-libraries
+
+RUN bundle check || bundle install
+
+COPY package.json ./
+
+RUN yarn install --check-files
+
+COPY . ./
+
+ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]
+
